@@ -120,7 +120,21 @@ class Maze {
 	 * @return
 	 */
 	public ArrayList<Square> storePath() {
-		/* Complete this method */
-		return null;
+		SearchWorklist q = new QueueWorklist();
+		ArrayList<Square> pathRev = new ArrayList<Square>();
+		ArrayList<Square> path = new ArrayList<Square>();
+		Square f = MazeSolver.solve(this, q);
+		if (f == null) return path;
+		Square curr = f;
+		while (f != this.start) {
+			pathRev.add(curr);
+			curr = curr.getPrevious();
+		}
+		pathRev.add(this.start);
+		for (int i = pathRev.size() - 1; i >=0; i--) {
+			path.add(pathRev.get(i));
+		}
+		return path;
+
 	}
 }
